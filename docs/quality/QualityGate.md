@@ -33,7 +33,7 @@ El workflow `quality-gate.yml` se ejecuta automáticamente en cada Pull Request 
 
 | Fecha | PR | Resultado | Enlace Actions | Observaciones |
 |---|---|---|---|---|
-| 2026-07-23 | #1 feature/quality-baseline → main | ✅ Passed | _[Agregar enlace]_ | Ejecución inicial |
+| 2026-07-23 | #1 feature/quality-baseline → main | ✅ Passed | [Ver run](https://github.com/JFigueroatz/qa-student-tracker/actions/runs/30017301343/job/89240531964?pr=1) | Ejecución inicial — 16 tests passed, 0 errores flake8 |
 
 ---
 
