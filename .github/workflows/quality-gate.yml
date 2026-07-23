@@ -1,0 +1,69 @@
+name: Quality Gate Inicial
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-gate:
+    name: quality-gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Paso 1: Validación de documentación obligatoria ────────────────────
+      - name: Validate required documentation
+        run: |
+          echo "📄 Verificando existencia de documentos obligatorios..."
+          test -f README.md          && echo "✅ README.md encontrado"          || (echo "❌ README.md no encontrado" && exit 1)
+          test -f docs/quality/CTQ.md && echo "✅ CTQ.md encontrado"             || (echo "❌ CTQ.md no encontrado" && exit 1)
+          test -f docs/quality/DoD.md && echo "✅ DoD.md encontrado"             || (echo "❌ DoD.md no encontrado" && exit 1)
+
+      # ── Paso 2: Validación de contenido mínimo en Markdown ─────────────────
+      - name: Check Markdown basic quality
+        run: |
+          echo "🔍 Validando contenido mínimo de documentos..."
+          grep -q "CTQ" docs/quality/CTQ.md \
+            && echo "✅ CTQ.md contiene referencia CTQ" \
+            || (echo "❌ CTQ.md no contiene referencia CTQ" && exit 1)
+
+          grep -q "Definition of Done" docs/quality/DoD.md \
+            && echo "✅ DoD.md contiene 'Definition of Done'" \
+            || (echo "❌ DoD.md no contiene 'Definition of Done'" && exit 1)
+
+      # ── Paso 3: Setup Python ───────────────────────────────────────────────
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # ── Paso 4: Instalar dependencias ──────────────────────────────────────
+      - name: Install dependencies
+        run: |
+          echo "📦 Instalando dependencias..."
+          pip install pytest flake8
+
+      # ── Paso 5: Linter ─────────────────────────────────────────────────────
+      - name: Run linter (flake8)
+        run: |
+          echo "🧹 Ejecutando linter..."
+          flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics --max-line-length=100
+          echo "✅ Linter sin errores críticos"
+
+      # ── Paso 6: Pruebas unitarias ──────────────────────────────────────────
+      - name: Run unit tests (pytest)
+        run: |
+          echo "🧪 Ejecutando pruebas unitarias..."
+          cd src && pytest test_tracker.py -v --tb=short
+          echo "✅ Todas las pruebas pasaron"
+
+      # ── Resumen final ──────────────────────────────────────────────────────
+      - name: Gate summary
+        run: |
+          echo "========================================"
+          echo "  ✅ QUALITY GATE COMPLETADO CON ÉXITO"
+          echo "  Proyecto: QA Student Tracker"
+          echo "  Rama: ${{ github.head_ref }}"
+          echo "========================================"
