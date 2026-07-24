@@ -34,7 +34,7 @@ class TestValidarEntrega:
         assert resultado["estado"] == "aprobado"
 
 
-# ── CTQ-002: Cálculo de promedio ─────────────────────────────────────────────
+# CTQ-002: Cálculo de promedio
 
 class TestCalcularPromedio:
     def test_promedio_normal(self):
