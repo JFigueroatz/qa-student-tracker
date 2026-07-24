@@ -50,7 +50,7 @@ class TestCalcularPromedio:
         assert calcular_promedio([95]) == 95.0
 
 
-# ── CTQ-003: Estado del estudiante ───────────────────────────────────────────
+# CTQ-003: Estado del estudiante 
 
 class TestEstadoEstudiante:
     def test_excelente(self):
