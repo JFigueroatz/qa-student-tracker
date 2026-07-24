@@ -37,6 +37,17 @@ El workflow `quality-gate.yml` se ejecuta automáticamente en cada Pull Request 
 
 ---
 
+## Conclusión del Sprint
+
+| Ítem | Estado |
+|---|---|
+| CTQs Must completados | ✅ 3/3 |
+| Issues cerrados | ✅ 3/3 |
+| PR aprobado | ✅ AndreaChk |
+| Gate ejecutado | ✅ 13 segundos |
+| Pruebas unitarias | ✅ 16/16 passed |
+| Errores de linter | ✅ 0 errores |
+
 ## Cómo interpretar el resultado
 
 - ✅ **Passed:** Todos los pasos del job `quality-gate` completaron con exit code 0. El PR puede fusionarse.
