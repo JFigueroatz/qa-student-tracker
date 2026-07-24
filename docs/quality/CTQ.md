@@ -30,9 +30,16 @@ CTQ-002 → Issue #2 → TestCalcularPromedio → quality-gate.yml → PR #1
 CTQ-003 → Issue #3 → flake8 src/ → quality-gate.yml → PR #1
 ```
 
+## Historial de validación
+
+| CTQ | Prueba asociada | Resultado | Fecha |
+|---|---|---|---|
+| CTQ-001 | TestValidarEntrega (6 casos) | ✅ Passed | 2026-07-23 |
+| CTQ-002 | TestCalcularPromedio (4 casos) | ✅ Passed | 2026-07-23 |
+| CTQ-003 | flake8 src/ | ✅ 0 errores | 2026-07-23 |
+
 ---
 
-## Historial de cambios
 
 | Versión | Fecha | Cambio | Responsable |
 |---|---|---|---|
